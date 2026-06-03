@@ -1,6 +1,6 @@
 import argparse
 import os
-
+import streamlit as st
 import pandas as pd
 
 from src.config import PROCESSED_DIR, REPORTS_DIR, ensure_directories
@@ -141,7 +141,20 @@ def template_insights(metrics: dict) -> str:
 #         return None
 
 def gemini_insights(metrics: dict) -> str | None:
-    if not os.getenv("GEMINI_API_KEY"):
+    # if not os.getenv("GEMINI_API_KEY"):
+    #     return None
+    # 1. Try to get the key from the local OS environment first
+    api_key = os.getenv("GEMINI_API_KEY")
+
+    # 2. If it's not found locally, try to pull it from Streamlit Secrets
+    if not api_key:
+        try:
+            api_key = st.secrets["GEMINI_API_KEY"]
+        except (FileNotFoundError, KeyError):
+            api_key = None
+
+    # 3. If it is still missing after checking both places, trigger the fallback
+    if not api_key:
         return None
     try:
         # Import the new, officially supported SDK
