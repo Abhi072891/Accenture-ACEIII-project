@@ -1,5 +1,7 @@
 # Stock Market Trend Analysis
 
+## Dashboard Link : https://accenture-aceiii-project-trend-analysis.streamlit.app/
+
 Enterprise-ready data pipeline and dashboard for analyzing historical stock trends and identifying patterns from daily OHLCV data. The project is designed for reproducible deployment: a single pipeline command autonomously bootstraps the local data cache, SQLite database, EDA charts, GenAI insight report, and the interactive Streamlit UI.
 
 **Disclaimer:** This is a historical trend analysis tool built for educational and evaluation purposes. It is not financial advice and is not a reliable price prediction system.
